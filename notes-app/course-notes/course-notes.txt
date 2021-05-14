@@ -1,0 +1,2 @@
+To install npm modules run: npm install
+To execute nodemon in PowerShell run the following (1) Run as administrator (2) in PowerShell execute --> Set-ExecutionPolicy Unrestricted

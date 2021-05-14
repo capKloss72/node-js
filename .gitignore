@@ -701,4 +701,4 @@ MigrationBackup/
 
 # Files generated during development
 
-notes.txt
+**/files

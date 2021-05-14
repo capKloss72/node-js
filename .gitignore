@@ -701,4 +701,8 @@ MigrationBackup/
 
 # Files generated during development
 
-**/files
+**/test_files
+
+# .vscode
+
+**/.vscode

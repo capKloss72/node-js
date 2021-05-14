@@ -1,8 +1,8 @@
-import { writeFileSync, appendFileSync } from 'fs';
+const fs = require('fs');
 
-writeFileSync('notes.txt', 'My name is Tym Zon\n');
+fs.writeFileSync('notes.txt', 'My name is Tym Zon\n');
 
 //---------- Challenge ------------//
 
-appendFileSync('notes.txt', 'I live at 11 Doongalla Road, Attadale, WA 6156\n');
+fs.appendFileSync('notes.txt', 'I live at 11 Doongalla Road, Attadale, WA 6156 and my number is 0000 000 000\n');
 

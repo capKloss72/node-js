@@ -1,4 +1,4 @@
-const add = require('./utils.js');
+const myNotes = require('./notes');
 
-console.log(add(2,2));
+console.log(myNotes());
 

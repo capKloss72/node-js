@@ -1,8 +1,4 @@
-const fs = require('fs');
+const add = require('./utils.js');
 
-fs.writeFileSync('./files/notes.txt', 'My name is Tym Zon\n');
-
-//---------- Challenge ------------//
-
-fs.appendFileSync('./files/notes.txt', 'I live at 11 Doongalla Road, Attadale, WA 6156 and my number is 0000 000 000\n');
+console.log(add(2,2));
 

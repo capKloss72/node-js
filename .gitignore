@@ -702,6 +702,7 @@ MigrationBackup/
 # Files generated during development
 
 **/test_files
+**/notes
 
 # .vscode
 

@@ -1,14 +1,11 @@
 const fs = require('fs');
+const chalk = require('chalk');
 
-const getNotes = () => {
-  return 'Your notes...';
-};
+const getNotes = () => 'Your notes...';
 
 const addNote = (title, body) => {
   const notes = loadNotes();
-  const duplicateNotes = notes.filter((note) => {
-    return note.title === title;
-  });
+  const duplicateNotes = notes.filter((note) => note.title === title);
 
   if (duplicateNotes.length === 0) {
     notes.push({
@@ -16,13 +13,27 @@ const addNote = (title, body) => {
       body: body,
     });
     saveNote(notes);
+    console.log(chalk.bgGreen(`A note with the title of "${title}" was added`));
   } else {
-    console.log(`A note with the title of "${title}" already exists`);
+    console.log(
+      chalk.bgRed(`A note with the title of "${title}" already exists`)
+    );
   }
 };
 
 const removeNote = (title) => {
-  console.log(`${title} to be removed`);
+  const notes = loadNotes();
+  const remainingNotes = notes.filter((note) => note.title !== title);
+  saveNote(remainingNotes);
+  notes.length > remainingNotes.length
+    ? console.log(chalk.bgGreen(`Note with a title of ${title} was removed!`))
+    : console.log(chalk.bgRed(`Note with a title of ${title} was not found!`));
+};
+
+const listNotes = () => {
+  const notes = loadNotes();
+  console.log(chalk.green(`Your Notes`));
+  notes.forEach((note) => console.log(note.title));
 };
 
 const loadNotes = () => {
@@ -35,9 +46,8 @@ const loadNotes = () => {
   }
 };
 
-const saveNote = (notes) => {
+const saveNote = (notes) =>
   fs.writeFileSync('./notes/notes.json', JSON.stringify(notes));
-};
 
 const checkTitle = (notes, title) => {
   notes.find((title) => {
@@ -49,4 +59,5 @@ module.exports = {
   getNotes: getNotes,
   addNote: addNote,
   removeNote: removeNote,
+  listNotes: listNotes,
 };

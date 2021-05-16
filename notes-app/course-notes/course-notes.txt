@@ -1,2 +1,3 @@
-To install npm modules run: npm install
-To execute nodemon in PowerShell run the following (1) Run as administrator (2) in PowerShell execute --> Set-ExecutionPolicy Unrestricted
+1) To install npm modules run: npm install
+2) To execute nodemon in PowerShell run the following (1) Run as administrator (2) in PowerShell execute --> Set-ExecutionPolicy Unrestricted
+3) If issues using inspect on windows use node --inspect-brk instead of inspect

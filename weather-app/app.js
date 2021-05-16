@@ -4,14 +4,17 @@ const { CLIENT_RENEG_LIMIT } = require('tls');
 const urlMapbox =
   'https://api.mapbox.com/geocoding/v5/mapbox.places/Perth.json?access_token=pk.eyJ1IjoiY2Fwa2xvc3M3MiIsImEiOiJja29yNDBtaGgwaTh1MndwZGVsYzJzc3IxIn0.35UjY6fbuUT8aReyX33GZw';
 
-const center = request({ url: urlMapbox, json: true }, (error, response) => {
+let newLoc = [];
+
+request({ url: urlMapbox, json: true }, (error, response) => {
   console.log(`${response.body.features[0].center[1]}`);
-  return response.body.features[0].center;
+  newLoc = response.body.features[0].center;
+  console.log(newLoc);
 });
 
-console.log(`${center[1]},${center[0]}`);
+console.log(`${newLoc[1]},${newLoc[0]}`);
 
-let urlWS = `http://api.weatherstack.com/current?access_key=e3bddab3e02266169155bdb5d371c3d1&query=${center[1]},${center[0]}&units=m`;
+let urlWS = `http://api.weatherstack.com/current?access_key=e3bddab3e02266169155bdb5d371c3d1&query=${newLoc[1]},${newLoc[0]}&units=m`;
 
 request({ url: urlWS, json: true }, (error, response) => {
   console.log(

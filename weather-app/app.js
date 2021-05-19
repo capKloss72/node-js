@@ -1,20 +1,6 @@
 const request = require('postman-request');
 const geoCode = require('./utils/geocode.js');
-const geocode = require('./utils/geocode.js');
-
-// let urlWS = `http://api.weatherstack.com/current?access_key=e3bddab3e02266169155bdb5d371c3d1&query=-31.9527,115.8605&units=m`;
-
-// request({ url: urlWS, json: true }, (error, response) => {
-//   if (error) {
-//     console.log('Unable to connect to weather service ice');
-//   } else if (response.body.success === false) {
-//     console.log(`${response.body.error.info}`);
-//   } else {
-//     console.log(
-//       `${response.body.current.weather_descriptions[0]}. It is currently ${response.body.current.temperature} degrees and it feels like ${response.body.current.feelslike} degrees`
-//     );
-//   }
-// });
+const forecast = require('./utils/forecast.js');
 
 // const urlMapbox =
 //   'https://api.mapbox.com/geocoding/v5/mapbox.places/Perth.json?access_token=pk.eyJ1IjoiY2Fwa2xvc3M3MiIsImEiOiJja29yNDBtaGgwaTh1MndwZGVsYzJzc3IxIn0.35UjY6fbuUT8aReyX33GZw&limit=1';
@@ -51,8 +37,29 @@ const getWeatherForecast = (location, callback) => {
   });
 };
 
-geoCode('Margaret River', (error, data) => {
-  getWeatherForecast(data, (error, data) => {
-    console.log(data);
-  });
-});
+// geoCode('Margaret River', (error, data) => {
+//   getWeatherForecast(data, (error, data) => {
+//     console.log(data);
+//   });
+// });
+
+//
+// Goal: Create a reusable function for getting the forecast
+//
+// 1. Setup the "forecast" function in utils/forecast.js
+// 2. Require the function in app.js and call it as shown below
+// 3. The forecast function should have three potential calls to callback:
+//    - Low level error, pass string for error
+//    - Coordinate error, pass string for error
+//    - Success, pass forecast string for data (same format as from before)
+
+forecast(
+  {
+    Latitude: -75.7088,
+    Longitude: 44.1545,
+  },
+  (error, data) => {
+    console.log('Error', error);
+    console.log('Data', data);
+  }
+);

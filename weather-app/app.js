@@ -18,24 +18,24 @@ const forecast = require('./utils/forecast.js');
 //   }
 // });
 
-const getWeatherForecast = (location, callback) => {
-  let url = `http://api.weatherstack.com/current?access_key=e3bddab3e02266169155bdb5d371c3d1&query=${encodeURIComponent(
-    location.Latitude
-  )},${encodeURIComponent(location.Longitude)}&units=m`;
+// const getWeatherForecast = (location, callback) => {
+//   let url = `http://api.weatherstack.com/current?access_key=e3bddab3e02266169155bdb5d371c3d1&query=${encodeURIComponent(
+//     location.Latitude
+//   )},${encodeURIComponent(location.Longitude)}&units=m`;
 
-  request({ url: url, json: true }, (error, response) => {
-    if (error) {
-      callback('Unable to connect to weather service ice', undefined);
-    } else if (response.body.success === false) {
-      callback(`${response.body.error.info}`), undefined;
-    } else {
-      callback(
-        undefined,
-        `${response.body.current.weather_descriptions[0]}. It is currently ${response.body.current.temperature} degrees in ${location.Location} and it feels like ${response.body.current.feelslike} degrees`
-      );
-    }
-  });
-};
+//   request({ url: url, json: true }, (error, response) => {
+//     if (error) {
+//       callback('Unable to connect to weather service ice', undefined);
+//     } else if (response.body.success === false) {
+//       callback(`${response.body.error.info}`), undefined;
+//     } else {
+//       callback(
+//         undefined,
+//         `${response.body.current.weather_descriptions[0]}. It is currently ${response.body.current.temperature} degrees in ${location.Location} and it feels like ${response.body.current.feelslike} degrees`
+//       );
+//     }
+//   });
+// };
 
 // geoCode('Margaret River', (error, data) => {
 //   getWeatherForecast(data, (error, data) => {
@@ -53,13 +53,19 @@ const getWeatherForecast = (location, callback) => {
 //    - Coordinate error, pass string for error
 //    - Success, pass forecast string for data (same format as from before)
 
-forecast(
-  {
-    Latitude: -75.7088,
-    Longitude: 44.1545,
-  },
-  (error, data) => {
-    console.log('Error', error);
-    console.log('Data', data);
-  }
-);
+// const geoloc = {
+//   Latitude: 52.237049,
+//   Longitude: 21.017532,
+//   Location: 'Perth',
+// };
+
+const geoloc = {
+  Latitude: 52.237049,
+  Longitude: 21.017532,
+  Location: 'Perth',
+};
+
+forecast(geoloc, (error, data) => {
+  console.log('Error', error);
+  console.log('Data', data);
+});

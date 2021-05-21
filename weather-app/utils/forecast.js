@@ -1,6 +1,6 @@
 const request = require('postman-request');
 
-const getWeatherForecast = (location, callback) => {
+const forecast = (location, callback) => {
   let url = `http://api.weatherstack.com/current?access_key=e3bddab3e02266169155bdb5d371c3d1&query=${encodeURIComponent(
     location.Latitude
   )},${encodeURIComponent(location.Longitude)}&units=m`;
@@ -13,10 +13,10 @@ const getWeatherForecast = (location, callback) => {
     } else {
       callback(
         undefined,
-        `${response.body.current.weather_descriptions[0]}. It is currently ${response.body.current.temperature} degrees in ${location.Location} and it feels like ${response.body.current.feelslike} degrees`
+        `${response.body.current.weather_descriptions[0]}. It is currently ${response.body.current.temperature} degrees and it feels like ${response.body.current.feelslike} degrees`
       );
     }
   });
 };
 
-module.exports = getWeatherForecast;
+module.exports = forecast;

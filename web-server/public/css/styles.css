@@ -5,3 +5,7 @@ h1 {
 img {
   size: 250px;
 }
+
+p {
+  font: italic;
+}

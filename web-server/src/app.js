@@ -3,7 +3,15 @@ const express = require('express');
 
 const app = express();
 
+app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, '../public')));
+
+app.get('', (req, res) => {
+  res.render('index', {
+    title: 'Weather App',
+    name: 'Tym Zon',
+  });
+});
 
 // app.com
 // app.com/help

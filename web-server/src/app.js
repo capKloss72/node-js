@@ -39,6 +39,22 @@ app.get('/help', (req, res) => {
   });
 });
 
+app.get('/help/*', (req, res) => {
+  res.render('404', {
+    title: '404',
+    message: 'Help article not found',
+    name: 'Tym Zon',
+  });
+});
+
+app.get('*', (req, res) => {
+  res.render('404', {
+    title: '404',
+    message: 'Page not found',
+    name: 'Tym Zon',
+  });
+});
+
 // app.com
 // app.com/help
 // app.com/about

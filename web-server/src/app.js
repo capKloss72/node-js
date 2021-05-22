@@ -1,3 +1,6 @@
+const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
+
 const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
@@ -39,6 +42,39 @@ app.get('/help', (req, res) => {
   });
 });
 
+app.get('/weather', (req, res) => {
+  if (!req.query.address) {
+    return res.send({ error: 'You must provide a valid address!' });
+  }
+
+  geocode(req.query.address, (error, geocodeData) => {
+    if (error) {
+      return res.send({ error });
+    }
+    forecast(geocodeData, (error, forecastData) => {
+      if (error) {
+        return res.send({ error });
+      }
+      res.send([
+        {
+          location: geocodeData.Location,
+          forecast: forecastData,
+          address: req.query.address,
+        },
+      ]);
+    });
+  });
+});
+
+app.get('/products', (req, res) => {
+  if (!req.query.search) {
+    return res.send({ error: 'You must provide a search query!' });
+  }
+
+  console.log(req.query.search);
+  res.send({ products: [req.query.search] });
+});
+
 app.get('/help/*', (req, res) => {
   res.render('404', {
     title: '404',
@@ -59,10 +95,6 @@ app.get('*', (req, res) => {
 // app.com/help
 // app.com/about
 // app.com/weather
-
-app.get('/weather', (req, res) => {
-  res.send([{ forecast: `It's 23 degrees`, location: `Perth` }]);
-});
 
 app.listen(3000, () => {
   console.log('Server is up on port 3000');
